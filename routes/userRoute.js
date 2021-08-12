@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
     if (checkUser) {
       return res
         .status(400)
-        .json({ errorMessage: "Email is already registered !" });
+        .json({ status:false, errorMessage: "Email is already registered !" });
     }
 
 
@@ -39,12 +39,12 @@ router.post("/register", async (req, res) => {
         token: getToken(newUser),
       });
 }catch(err){
-  console.log("got catch",err);
-
-      res.status(409).json({ message: `${err.message} Invalid User Data.` });
+   //console.log("got catch", err);
+      res.status(409).json({ status:false, message: `${err.message} Invalid User Data.` });
     }
   })
   
+//login a user   
 router.post("/login", async(req, res)=>{
   
   try{
@@ -56,7 +56,7 @@ router.post("/login", async(req, res)=>{
     if (!signinUser) {
       return res
         .status(400)
-        .json({ errorMessage: "Wrong email or password !" });
+        .json({ status:false, errorMessage: "Wrong email or password !" });
     }
 
     const correctPassword = await bcrypt.compare(password, signinUser.password);
@@ -65,13 +65,14 @@ router.post("/login", async(req, res)=>{
     if (!correctPassword) {
       return res
         .status(400)
-        .json({ errorMessage: "Wrong email or password !" });
+        .json({ status:false, errorMessage: "Wrong email or password !" });
     }
 
-    console.log({signinUser});
+    // console.log({signinUser});
 
     if(signinUser){
       res.status(200).send({
+        status:true,
         _id: signinUser.id,
         name: signinUser.name,
         email: signinUser.email,
@@ -80,31 +81,32 @@ router.post("/login", async(req, res)=>{
     }
   }catch(err){
     console.log(err.message);
-    res.status(401).send({ message: 'Invalid Email or Password.' });
+    res.status(401).send({ status:false, message: 'Invalid Email or Password.' });
   }
 })
 
+//get the user profile details
 router.get("/profile", isAuth, async (req, res) => {
   
   try {
-    let userDetails = req.body;
-      const updatedPost = await User.findOne(
+      const userDetails = await User.findOne(
       { _id: req.user._id },
       {password : 0}
     );
-    return res.status(201).json({ status:true, "data": updatedPost });
+    return res.status(201).json({ status:true, "data": userDetails });
   } catch (err) {
-    console.log("errorpost"+ err);
+    // console.log("errorpost"+ err);
     res.status(404).json({ errorMessage: "Error in Updating Unkown Post " });
   }
 });
 
 
+//update the user profile details
 router.post("/profile", isAuth, async (req, res) => {
   
   try {
     let updatePost = req.body;
-    console.log("userDetailspost",updatePost);
+    // console.log("userDetailspost",updatePost);
 
       const updatedPost = await User.updateOne(
       { _id: req.user._id },
@@ -112,8 +114,8 @@ router.post("/profile", isAuth, async (req, res) => {
     );
     return res.status(201).json({ status:true, "Data updated ": updatedPost });
   } catch (err) {
-    console.log("errorpost"+ err);
-    res.status(404).json({ errorMessage: "Error in Updating Unkown Post " });
+    // console.log("errorpost"+ err);
+    res.status(404).json({ status:false, errorMessage: "Error in Updating Unkown Post " });
   }
 });
 
