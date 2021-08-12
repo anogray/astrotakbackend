@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
       password: passwordHash,
     });
 
-    console.log({user});
+    // console.log({user});
     const newUser = await user.save();
       return res.send({
         success:true,
@@ -106,7 +106,7 @@ router.post("/profile", isAuth, async (req, res) => {
   
   try {
     let updatePost = req.body;
-    // console.log("userDetailspost",updatePost);
+    console.log("userDetailspost",updatePost);
 
       const updatedPost = await User.updateOne(
       { _id: req.user._id },
@@ -114,7 +114,7 @@ router.post("/profile", isAuth, async (req, res) => {
     );
     return res.status(201).json({ status:true, "Data updated ": updatedPost });
   } catch (err) {
-    // console.log("errorpost"+ err);
+    console.log("errorpost"+ err);
     res.status(404).json({ status:false, errorMessage: "Error in Updating Unkown Post " });
   }
 });

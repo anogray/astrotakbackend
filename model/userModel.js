@@ -26,9 +26,9 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String, required: true, unique: true, index: true,
   },
-  password: { type: String, required: true },
-  phonecode:{ type: String },
-  phonenumber: { type: String },
+  password: { type: String, required:true},
+  phonecode:{ type: String},
+  phonenumber: { type: String},
   gender: { type: String },
   languageObj: language,
   martial:{ type: String },
