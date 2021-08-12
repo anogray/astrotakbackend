@@ -12,9 +12,9 @@ const getToken = (user) => {
       email: user.email,
     },
     config.JWT_SECRET,
-    {
-      expiresIn: '48h',
-    }
+    // {
+    //   expiresIn: '48h',
+    // }
   );
 };
 
@@ -28,7 +28,7 @@ const isAuth = (req, res, next) => {
         if (err) {
           return res.status(401).send({ message: 'Invalid Token' });
         }
-        console.log("decode",decode);
+        // console.log("decode",decode);
         req.user = decode;
         next();
         return;

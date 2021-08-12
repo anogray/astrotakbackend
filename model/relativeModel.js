@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 
-const birthDetailsObj  = {
+const birthDetails  = {
   day:{ type: Number },
   month:{ type: Number },
   year:{ type: Number },
@@ -14,8 +14,8 @@ const birthDetailsObj  = {
 
 const relativeSchema = new mongoose.Schema({
   userId : { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  name: { type: String, required: true },
-  birthDetails : birthDetailsObj,
+  name: { type: String,  required: true },
+  birthDetails : birthDetails,
   birthlocation:{ type: String },
   gender: { type: String },
   relation:{ type: String },

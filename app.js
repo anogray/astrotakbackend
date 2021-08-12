@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import config from "./config.js";
 import userRoute from "./routes/userRoute.js"
 import relativeRoute from "./routes/relativeRoute.js"
+import utilRoute from "./routes/utilRoute.js"
 
 
 const app = express();
@@ -33,13 +34,9 @@ app.get("/",(req,res)=>{
 
 app.use('/api/user', userRoute);
 app.use('/api/relative', relativeRoute);
-// // app.use('/api/uploads', uploadRoute);
-// app.use("/api/products",products );
+app.use("/api/location",utilRoute );
 
 
-// app.use('/api/orders', orderRoute);
-// app.use("/api/razorpay", payment);
-// app.use("/api/download", download);
 
 
 

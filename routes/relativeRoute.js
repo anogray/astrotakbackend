@@ -40,7 +40,7 @@ router.post("/", isAuth, async(req, res)=>{
       });
     }
   }catch(err){
-    console.log(err.message);
+    console.log(" seeerr" +err.message);
     res.status(401).send({ message: 'Invalid Email or Password.' });
   }
 })

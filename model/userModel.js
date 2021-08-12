@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
   phonecode:{ type: String },
   phonenumber: { type: String },
   gender: { type: String },
-  language: language,
+  languageObj: language,
   martial:{ type: String },
   birthDetails : birthDetails,
   addressObj: addressObj,
