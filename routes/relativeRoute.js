@@ -6,6 +6,7 @@ const router = express.Router();
 
 //get user's all relatives
 router.get("/all", isAuth, async (req, res) => {
+  
 // console.log("got all relatives",req.user._id); receving user id from token after being checked
   
 try{
@@ -36,7 +37,8 @@ router.post("/", isAuth, async(req, res)=>{
     if(newRelative){
       res.status(200).send({
         success:true,
-        msg:"Relative added"
+        msg:"Relative added",
+        data:newRelative
       });
     }
   }catch(err){
